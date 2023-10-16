@@ -12,8 +12,8 @@ import com.finzly.demo.entity.Student;
 import jakarta.transaction.Transactional;
 
 @Repository
-public interface StudentRepository extends JpaRepository<Student, Long>{
-	  
+public interface StudentRepository extends JpaRepository<Student, Long> {
+
 	List<Student> findByName(String name);
 
 	List<Student> findByCity(String city);
@@ -23,10 +23,8 @@ public interface StudentRepository extends JpaRepository<Student, Long>{
 	List<Student> findBySchool(String school);
 
 	List<Student> findByPhoneno(String phoneno);
-	
+
 	Optional<Student> findById(Long Id);
-	
-	
 
 	@Query("SELECT student FROM Student student WHERE student.marks > :mark")
 	List<Student> getAllGreaterMarks(int mark);
@@ -36,7 +34,6 @@ public interface StudentRepository extends JpaRepository<Student, Long>{
 	@Query("UPDATE Student s SET s.city = ?2 WHERE s.id = ?1")
 	void updateCityById(long id, String city);
 
-	
 	@Modifying
 	@Transactional
 	@Query("UPDATE Student s SET s.city = :city, s.name = :name,  s.phoneno = :phoneno, s.standard = :standard WHERE s.id = :id")

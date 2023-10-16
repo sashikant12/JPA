@@ -54,56 +54,51 @@ public class StudentService {
 		return studentRepository.getAllGreaterMarks(mark);
 	}
 
-	public String updateCityById(long id, String city){
+	public String updateCityById(long id, String city) {
 		Optional<Student> s = studentRepository.findById(id);
-		if(s.isPresent()) {
+		if (s.isPresent()) {
 			studentRepository.updateCityById(id, city);
-            return "City Updated";
-		}
-		else {
-            return "Student not found with ID: " + id;
+			return "City Updated";
+		} else {
+			return "Student not found with ID: " + id;
 		}
 	}
 
-	public ResponseEntity<String> updateStudentById(long id, String city, String name, String phoneno, String standard) {
+	public ResponseEntity<String> updateStudentById(long id, String city, String name, String phoneno,
+			String standard) {
 		Optional<Student> s = studentRepository.findById(id);
-		if(s.isPresent()) {
-			studentRepository.updateStudentById(id,city,name,phoneno,standard);
-            return ResponseEntity.status(HttpStatus.OK).body("Student Updated");
-		}
-		else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Student not found with ID: " + id);
+		if (s.isPresent()) {
+			studentRepository.updateStudentById(id, city, name, phoneno, standard);
+			return ResponseEntity.status(HttpStatus.OK).body("Student Updated");
+		} else {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Student not found with ID: " + id);
 		}
 	}
-
-	
 
 	public boolean updateStudent(long id, Student updatedStudent) {
-		   Student existingStudent = studentRepository.findById(id).orElse(null);
+		Student existingStudent = studentRepository.findById(id).orElse(null);
 
-	        if (existingStudent != null) {
-	            // Update the student's information with the provided data
-	            existingStudent.setName(updatedStudent.getName());
-	            existingStudent.setPhoneno(updatedStudent.getPhoneno());
-	            existingStudent.setStandard(updatedStudent.getStandard());
-	            existingStudent.setCity(updatedStudent.getCity());
-	            existingStudent.setMarks(updatedStudent.getMarks());
-	            existingStudent.setSchool(updatedStudent.getSchool());
-	            studentRepository.save(existingStudent); // Save the updated entity
-	            return true; // Update successful
-	        }
+		if (existingStudent != null) {
+			// Update the student's information with the provided data
+			existingStudent.setName(updatedStudent.getName());
+			existingStudent.setPhoneno(updatedStudent.getPhoneno());
+			existingStudent.setStandard(updatedStudent.getStandard());
+			existingStudent.setCity(updatedStudent.getCity());
+			existingStudent.setMarks(updatedStudent.getMarks());
+			existingStudent.setSchool(updatedStudent.getSchool());
+			studentRepository.save(existingStudent); // Save the updated entity
+			return true; // Update successful
+		}
 
-	        return false; // Student not found, update failed
-	    }
-
-
+		return false; // Student not found, update failed
+	}
 
 	public boolean deleteStudentById(long id) {
-		  if (studentRepository.existsById(id)) {
-	            studentRepository.deleteById(id); // Delete the student by id
-	            return true; // Deletion successful
-	        }
-	        return false; // Student not found, deletion failed
-	    }
+		if (studentRepository.existsById(id)) {
+			studentRepository.deleteById(id); // Delete the student by id
+			return true; // Deletion successful
+		}
+		return false; // Student not found, deletion failed
+	}
 
 }
