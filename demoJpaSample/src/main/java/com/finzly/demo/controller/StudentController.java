@@ -57,7 +57,7 @@ public class StudentController {
 		return studentService.getAllByPhoneno(phoneno);
 	}
 
-	@GetMapping("/marks/{mark}")
+	@GetMapping("/greaterMarks/{mark}")
 	public List<Student> getAllGreaterMarks(@PathVariable("mark") int mark) {
 		return studentService.getAllGreaterMarks(mark);
 	}
