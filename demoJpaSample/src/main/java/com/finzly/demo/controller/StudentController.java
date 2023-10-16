@@ -28,7 +28,7 @@ public class StudentController {
 		return studentService.getAllFromDatabaseJPA();
 	}
 	
-	@GetMapping("/new")
+	@GetMapping("/newStudent")
 	public String setStudentNameJPA(@RequestBody Student student) {
 		return studentService.setStudentNameJPA(student);
 	}
